@@ -1,0 +1,20 @@
+.table {
+  border-collapse: collapse;
+  background-color: #1e1e1e;
+  color: #ccc;
+}
+
+.table-row-cell {
+  border: 1px solid grey;
+  height: 45px;
+  width: 120px;
+}
+
+.table-row-cell__input {
+  padding: 15px;
+}
+
+.table-row--header,
+.table-row-cell--one-result {
+  color: white;
+}
