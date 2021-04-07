@@ -16,5 +16,5 @@ npm run dev
 
 ## Запуск тестов
 ```
-npm run dev
+npm run test
 ```
