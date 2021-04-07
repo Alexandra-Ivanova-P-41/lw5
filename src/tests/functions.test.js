@@ -1,61 +1,70 @@
-const moduleFunctions = require('../js/functions.js');
+const functions = require('../js/functions');
 
-test('Will setPrice assign a value to the element', () => {
+test('Changing the price value', () => {
   const productsList = [
     { id: 1, name: 'Молоко', count: 40, priceForOne: 50 },
     { id: 2, name: 'Хлеб', count: 100, priceForOne: 20 },
     { id: 3, name: 'Лук', count: 200, priceForOne: 5 },
   ];
-  moduleFunctions.setPrice(productsList[0], 100);
-  expect(productsList[0].priceForOne).toBe(100);
+  functions.setPrice(productsList[0], 51);
+  expect(productsList[0].priceForOne).toBe(51);
 
-  moduleFunctions.setPrice(productsList[1], 0);
-  expect(productsList[1].priceForOne).toBe(20);
+  let result = functions.setPrice(productsList[1], 50);
+  expect(result).toBe(true);
+  expect(productsList[1].priceForOne).toBe(50);
 
-  moduleFunctions.setPrice(productsList[2], 'a');
+  result = functions.setPrice(productsList[2], 'a');
+  expect(result).toBe(false);
   expect(productsList[2].priceForOne).toBe(5);
 });
 
-test('Will setCount assign a value to the element', () => {
+test('Changing the count value', () => {
   const productsList = [
     { id: 1, name: 'Молоко', count: 40, priceForOne: 50 },
     { id: 2, name: 'Хлеб', count: 100, priceForOne: 20 },
     { id: 3, name: 'Лук', count: 200, priceForOne: 5 },
   ];
-  moduleFunctions.setCount(productsList[0], 100);
-  expect(productsList[0].count).toBe(100);
+  functions.setCount(productsList[0], 41);
+  expect(productsList[0].count).toBe(41);
 
-  moduleFunctions.setCount(productsList[1], 0);
-  expect(productsList[1].count).toBe(1);
+  let result = functions.setCount(productsList[1], 40);
+  expect(result).toBe(true);
+  expect(productsList[1].count).toBe(40);
 
-  moduleFunctions.setCount(productsList[2], 'a');
+  result = functions.setCount(productsList[2], 'a');
+  expect(result).toBe(false);
   expect(productsList[2].count).toBe(200);
 });
 
-test('Will getAllTotalPrice return the total amount', () => {
+test('Calculating the total amount', () => {
   const productsList = [
     { id: 1, name: 'Молоко', count: 40, priceForOne: 50 },
     { id: 2, name: 'Хлеб', count: 100, priceForOne: 20 },
     { id: 3, name: 'Лук', count: 200, priceForOne: 5 },
   ];
-  expect(moduleFunctions.getAllTotalPrice(productsList)).toBe(0);
+  
+  let result = functions.getAllTotalPrice(productsList);
+  expect(result).toBe(false);
 
-  for (let i = 0; i < productsList.length; i++) {
-    moduleFunctions.calculateTotalPrice(productsList[i]);
-  }
-  expect(moduleFunctions.getAllTotalPrice(productsList)).toBe(5000);
+  productsList.forEach(function (item) {
+    functions.setTotalPrice(item);
+  });
+
+result = functions.getAllTotalPrice(productsList);
+  expect(result).toBe(5000);
 });
 
 test('Will calculateTotalPrice return the total sum of the item', () => {
   const productsList = [
-    { id: 1, name: 'Молоко', count: 40, priceForOne: 50 },
+    { id: 1, name: 'Молоко', count: 40, priceForOne: 'f' },
     { id: 2, name: 'Хлеб', count: 100, priceForOne: 20 },
     { id: 3, name: 'Лук', count: 200, priceForOne: 5 },
   ];
-  moduleFunctions.calculateTotalPrice(productsList[0]);
-  expect(productsList[0].totalPrice).toBe(2000);
-  moduleFunctions.calculateTotalPrice(productsList[1]);
+
+  let result = functions.setTotalPrice(productsList[0]);
+  expect(result).toBe(false);
+
+  result = functions.setTotalPrice(productsList[1]);
+  expect(result).toBe(true);
   expect(productsList[1].totalPrice).toBe(2000);
-  moduleFunctions.calculateTotalPrice(productsList[2]);
-  expect(productsList[2].totalPrice).toBe(1000);
 });

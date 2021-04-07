@@ -3,12 +3,18 @@ export function getAllTotalPrice(elements) {
   elements.forEach(function (item) {
     total += item.totalPrice;
   });
+  if (Number.isNaN(total)) {
+    return false;
+  }
   return total;
 }
 
 export function setTotalPrice(element) {
+  if (Number.isNaN(+element.priceForOne) || Number.isNaN(+element.count)) {
+    return false;
+  }
   element.totalPrice = element.priceForOne * element.count;
-  return element;
+  return true;
 }
 
 export function setCount(element, count) {
