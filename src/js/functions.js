@@ -15,8 +15,9 @@ export function setCount(element, count) {
   const countNumber = +count;
   if (!Number.isNaN(countNumber) && countNumber >= 0) {
     element.count = countNumber;
+    return true;
   } else {
-    alert('Invalid input value');
+    return false;
   }
 }
 
@@ -24,7 +25,8 @@ export function setPrice(element, price) {
   const priceNumber = +price;
   if (!Number.isNaN(priceNumber) && priceNumber >= 0) {
     element.priceForOne = priceNumber;
+    return true;
   } else {
-    alert('Invalid input value');
+    return false;
   }
 }

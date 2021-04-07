@@ -13,3 +13,8 @@ npm run build
 ```
 npm run dev
 ```
+
+## Запуск тестов
+```
+npm run dev
+```

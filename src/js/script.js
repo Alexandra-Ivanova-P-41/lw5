@@ -32,9 +32,13 @@ function updateUI() {
           return false;
         });
         if (input.classList.contains('table-row-cell__input--count')) {
-          setCount(productListElement, +e.target.innerText);
+          if (!setCount(productListElement, +e.target.innerText)) {
+            alert('Invalid input value!');
+          }
         } else if (input.classList.contains('table-row-cell__input--priceForOne')) {
-          setPrice(productListElement, +e.target.innerText);
+          if (!setPrice(productListElement, +e.target.innerText)) {
+            alert('Invalid input value!');
+          }
         }
         setTotalPrice(productListElement);
       }
